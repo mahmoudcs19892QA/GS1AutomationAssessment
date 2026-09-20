@@ -1,8 +1,6 @@
 package com.mahmoud.manager;
 
-import com.mahmoud.pages.FileUploadPage;
-import com.mahmoud.pages.HomePage;
-import com.mahmoud.pages.UploadedFilePage;
+import com.mahmoud.pages.*;
 import org.openqa.selenium.WebDriver;
 
 public class PageManager {
@@ -11,6 +9,8 @@ public class PageManager {
     private HomePage homePage;
     private FileUploadPage fileUploadPage;
     private UploadedFilePage uploadedFilePage;
+    private DynamicLoadingPage dynamicLoadingpage;
+    private DynamicLoadedPage dynamicLoadedpage;
 
     public PageManager(WebDriver driver) {
         this.driver = driver;
@@ -38,5 +38,21 @@ public class PageManager {
         }
 
         return uploadedFilePage;
+    }
+    public DynamicLoadingPage getdynamicLoadingPage() {
+
+        if (dynamicLoadingpage == null) {
+            dynamicLoadingpage = new DynamicLoadingPage(driver);
+        }
+
+        return dynamicLoadingpage;
+    }
+    public DynamicLoadedPage getdynamicLoadedPage() {
+
+        if (dynamicLoadedpage == null) {
+            dynamicLoadedpage = new DynamicLoadedPage(driver);
+        }
+
+        return dynamicLoadedpage;
     }
 }

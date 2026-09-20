@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.nio.file.Paths;
+
 public class BaseTest {
     protected WebDriver driver;
     protected PageManager pageManager;
@@ -18,6 +20,12 @@ public class BaseTest {
         driver = new ChromeDriver();
 
         pageManager = new PageManager(driver);
+    }
+    protected String getDirectory(String directoryKey, String fileName){
+        return
+        Paths.get(ConfigReader.get(directoryKey), fileName)
+                .toAbsolutePath()
+                .toString();
     }
 
     protected void openBaseUrl() {

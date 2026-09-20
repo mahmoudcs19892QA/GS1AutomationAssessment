@@ -11,7 +11,7 @@ import com.mahmoud.data.FileUploadDataProvider;
 import java.nio.file.Paths;
 
 public class FileUploadTest extends BaseTest {
-    private static final String TEST_DATA_DIRECTORY = "src/test/resources/test-data";
+
     @Test(
             dataProvider = "fileUploadData",
             dataProviderClass = FileUploadDataProvider.class
@@ -20,9 +20,7 @@ public class FileUploadTest extends BaseTest {
         openBaseUrl();
         HomePage homePage = pageManager.getHomePage();
         FileUploadPage fileUploadPage = homePage.clickFileUpload();
-        String filePath = Paths.get(TEST_DATA_DIRECTORY, fileName)
-                .toAbsolutePath()
-                .toString();
+        String filePath = getDirectory("base.directory",fileName);
         UploadedFilePage uploadedFilePage = fileUploadPage
                 .uploadFile(filePath)
                 .clickUpload();
