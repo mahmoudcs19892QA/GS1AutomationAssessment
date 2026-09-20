@@ -3,13 +3,19 @@ package com.mahmoud.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class UploadedFilePage extends BasePage{
+public class UploadedFilePage extends BasePage {
 
+    private final By header = By.tagName("h3");
     private final By uploadedFileName = By.id("uploaded-files");
 
-    public UploadedFilePage(WebDriver driver){
+    public UploadedFilePage(WebDriver driver) {
         super(driver);
     }
+
+    public String getHeaderText() {
+        return getText(header);
+    }
+
     public String getUploadedFileName() {
         return getText(uploadedFileName);
     }

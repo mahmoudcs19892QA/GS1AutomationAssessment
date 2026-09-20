@@ -1,12 +1,10 @@
 package com.mahmoud.tests;
 
 import com.mahmoud.base.BaseTest;
-import com.mahmoud.pages.FileUploadPage;
-import com.mahmoud.pages.HomePage;
+import com.mahmoud.data.FileUploadDataProvider;
 import com.mahmoud.pages.UploadedFilePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.mahmoud.data.FileUploadDataProvider;
 
 import java.nio.file.Paths;
 
@@ -18,20 +16,26 @@ public class FileUploadTest extends BaseTest {
     )
     public void verifyFileUpload(String fileName) {
         openBaseUrl();
-        HomePage homePage = pageManager.getHomePage();
-        FileUploadPage fileUploadPage = homePage.clickFileUpload();
-        String filePath = getDirectory("base.directory",fileName);
-        UploadedFilePage uploadedFilePage = fileUploadPage
+
+        String filePath = getDirectory("base.directory", fileName);
+        UploadedFilePage uploadedFilePage = pageManager.getHomePage()
+                .clickFileUpload()
                 .uploadFile(filePath)
                 .clickUpload();
+
         String expectedFileName = Paths.get(fileName)
                 .getFileName()
                 .toString();
 
         Assert.assertEquals(
-                uploadedFilePage.getUploadedFileName(),
-                expectedFileName
+                uploadedFilePage.getHeaderText(),
+                "File Uploaded!",
+                "Upload confirmation header does not match expected message."
         );
-
+        Assert.assertEquals(
+                uploadedFilePage.getUploadedFileName(),
+                expectedFileName,
+                "Uploaded file name does not match expected file name."
+        );
     }
 }

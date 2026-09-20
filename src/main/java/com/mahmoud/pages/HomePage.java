@@ -20,20 +20,4 @@ public class HomePage extends BasePage {
         click(dynamicLoadingLink);
         return new DynamicLoadingPage(driver);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
